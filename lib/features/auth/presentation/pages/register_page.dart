@@ -1,29 +1,30 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/constants/notification_constants.dart';
-import '../../../../core/di/injection_container.dart';
-import '../../../../features/notification/domain/repositories/notification_repository.dart';
 import '../../../../utils/theme.dart';
 import '../bloc/auth_bloc.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -35,18 +36,26 @@ class _LoginPageState extends State<LoginPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.message)),
           );
-        } else if (state is AuthSuccess && state.user != null) {
+        } else if (state is AuthSuccess) {
           context.go('/home');
         }
       },
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: AppColors.black),
+            onPressed: () => context.go('/login'),
+          ),
+        ),
         body: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 60),
+                const SizedBox(height: 20),
                 Center(
                   child: Container(
                     height: 100,
@@ -71,32 +80,46 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 40),
                 Text(
-                  'Welcome back',
+                  'Create Account',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onBackground,
+                        color: AppColors.black,
                       ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Login to your account',
+                  'Sign up to get started',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onBackground
-                            .withOpacity(0.7),
+                        color: AppColors.darkGrey,
                       ),
                 ),
                 const SizedBox(height: 32),
                 TextField(
+                  controller: _nameController,
+                  decoration: InputDecoration(
+                    hintText: 'Full Name',
+                    hintStyle: TextStyle(color: AppColors.darkGrey.withOpacity(0.7)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: AppColors.lightGrey),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: AppColors.lightGrey),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: AppColors.deepRed),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
                   controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: 'Email',
-                    hintStyle: TextStyle(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onBackground
-                            .withOpacity(0.5)),
+                    hintStyle: TextStyle(color: AppColors.darkGrey.withOpacity(0.7)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(color: AppColors.lightGrey),
@@ -117,11 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: _obscurePassword,
                   decoration: InputDecoration(
                     hintText: 'Password',
-                    hintStyle: TextStyle(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onBackground
-                            .withOpacity(0.5)),
+                    hintStyle: TextStyle(color: AppColors.darkGrey.withOpacity(0.7)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(color: AppColors.lightGrey),
@@ -136,30 +155,43 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscurePassword
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                        color: Theme.of(context).colorScheme.onBackground,
+                        _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                        color: AppColors.darkGrey,
+                      ),
+                      onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _confirmPasswordController,
+                  obscureText: _obscureConfirmPassword,
+                  decoration: InputDecoration(
+                    hintText: 'Confirm Password',
+                    hintStyle: TextStyle(color: AppColors.darkGrey.withOpacity(0.7)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: AppColors.lightGrey),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: AppColors.lightGrey),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: AppColors.deepRed),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
+                        color: AppColors.darkGrey,
                       ),
                       onPressed: () =>
-                          setState(() => _obscurePassword = !_obscurePassword),
+                          setState(() => _obscureConfirmPassword = !_obscureConfirmPassword),
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () => context.go('/forgot-password'),
-                    child: Text(
-                      'Forgot Password?',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onBackground,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 32),
                 BlocBuilder<AuthBloc, AuthState>(
                   builder: (context, state) {
                     return SizedBox(
@@ -169,19 +201,27 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: state is AuthLoading
                             ? null
                             : () {
-                                _handleLogin();
-                                context.read<AuthBloc>().add(
-                                      LoginRequested(
-                                        email: _emailController.text,
-                                        password: _passwordController.text,
-                                      ),
-                                    );
+                                if (_passwordController.text ==
+                                    _confirmPasswordController.text) {
+                                  context.read<AuthBloc>().add(
+                                        SignupRequested(
+                                          name: _nameController.text,
+                                          email: _emailController.text,
+                                          password: _passwordController.text,
+                                        ),
+                                      );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Passwords do not match'),
+                                    ),
+                                  );
+                                }
                               },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.deepRed,
-                          foregroundColor: Colors.white,
-                          disabledBackgroundColor:
-                              AppColors.deepRed.withOpacity(0.6),
+                          foregroundColor: AppColors.white,
+                          disabledBackgroundColor: AppColors.deepRed.withOpacity(0.6),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -192,16 +232,16 @@ class _LoginPageState extends State<LoginPage> {
                                 height: 24,
                                 width: 24,
                                 child: CircularProgressIndicator(
-                                  color: Colors.white,
+                                  color: AppColors.white,
                                   strokeWidth: 2,
                                 ),
                               )
-                            : Text(
-                                'Login',
+                            : const Text(
+                                'Create Account',
                                 style: TextStyle(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onPrimary),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                       ),
                     );
@@ -210,15 +250,14 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 24),
                 Center(
                   child: TextButton(
-                    onPressed: () => context.go('/signup'),
+                    onPressed: () => context.go('/login'),
                     child: RichText(
                       text: TextSpan(
-                        text: "Don't have an account? ",
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.onBackground),
+                        text: 'Already have an account? ',
+                        style: TextStyle(color: AppColors.darkGrey),
                         children: [
                           TextSpan(
-                            text: 'Sign Up',
+                            text: 'Login',
                             style: TextStyle(
                               color: AppColors.deepRed,
                               fontWeight: FontWeight.bold,
@@ -235,16 +274,5 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-
-  void _handleLogin() {
-    final notificationRepository = sl<NotificationRepository>();
-    final message = RemoteMessage(
-      notification: RemoteNotification(
-        title: 'Login Successful',
-        body: 'Welcome back! You have successfully logged in.',
-      ),
-    );
-    notificationRepository.showNotification(message);
   }
 }

@@ -30,6 +30,17 @@ void _handleMessage(RemoteMessage message) {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Set system UI overlay style
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+      systemNavigationBarColor: Colors.white,
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ),
+  );
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -52,16 +63,6 @@ void main() async {
   // Set up message handlers
   await notificationRepository.setupMessageHandlers(_handleMessage);
 
-  // Set system UI overlay style
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarColor: AppColors.deepRed,
-      systemNavigationBarIconBrightness: Brightness.light,
-    ),
-  );
-
   runApp(const MyApp());
 }
 
@@ -73,15 +74,45 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => di.sl<AuthBloc>(),
+          create: (context) => di.sl<AuthBloc>(),
         ),
       ],
       child: MaterialApp.router(
         title: 'Flutter Notification',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.deepRed),
           useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: AppColors.deepRed,
+            brightness: Brightness.light,
+          ),
+          appBarTheme: AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.transparent,
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.light,
+              systemNavigationBarColor: Colors.white,
+              systemNavigationBarIconBrightness: Brightness.dark,
+            ),
+          ),
         ),
+        darkTheme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: AppColors.deepRed,
+            brightness: Brightness.dark,
+          ),
+          appBarTheme: AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: Colors.transparent,
+              statusBarIconBrightness: Brightness.light,
+              statusBarBrightness: Brightness.dark,
+              systemNavigationBarColor: Colors.black,
+              systemNavigationBarIconBrightness: Brightness.light,
+            ),
+          ),
+        ),
+        themeMode: ThemeMode.system,
         routerConfig: appRouter,
       ),
     );

@@ -1,6 +1,10 @@
+import 'dart:ui';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_notification/core/constants/notification_constants.dart';
+import 'package:flutter_notification/utils/theme.dart';
 import '../../domain/repositories/notification_repository.dart';
 
 class NotificationRepositoryImpl implements NotificationRepository {
@@ -50,9 +54,11 @@ class NotificationRepositoryImpl implements NotificationRepository {
   }
 
   @override
-  Future<void> setupMessageHandlers(Function(RemoteMessage) onMessageHandler) async {
+  Future<void> setupMessageHandlers(
+      Function(RemoteMessage) onMessageHandler) async {
     // Handle notification open when app is terminated
-    RemoteMessage? initialMessage = await _firebaseMessaging.getInitialMessage();
+    RemoteMessage? initialMessage =
+        await _firebaseMessaging.getInitialMessage();
     if (initialMessage != null) {
       onMessageHandler(initialMessage);
     }
@@ -70,11 +76,18 @@ class NotificationRepositoryImpl implements NotificationRepository {
   Future<void> showNotification(RemoteMessage message) async {
     await _awesomeNotifications.createNotification(
       content: NotificationContent(
-        id: message.hashCode,
-        channelKey: NotificationConstants.basicChannelKey,
-        title: message.notification?.title ?? NotificationConstants.defaultNotificationTitle,
-        body: message.notification?.body ?? '',
-      ),
+          id: message.hashCode,
+          channelKey: NotificationConstants.basicChannelKey,
+          title: message.notification?.title ??
+              NotificationConstants.defaultNotificationTitle,
+          body: message.notification?.body ?? '',
+          icon: NotificationConstants.defaultIconPath,
+          category: NotificationCategory.Message,
+          displayOnForeground: true,
+          displayOnBackground: true,
+          customSound: NotificationConstants.defaultSoundPath,
+          wakeUpScreen: true,
+          color: AppColors.deepRed),
     );
   }
 }

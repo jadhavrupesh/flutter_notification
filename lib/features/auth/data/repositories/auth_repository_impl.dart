@@ -52,4 +52,18 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(AuthFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> resetPassword(String email) async {
+    // Mock implementation
+    try {
+      await Future.delayed(const Duration(seconds: 2)); // Simulate network delay
+      if (email.isNotEmpty) {
+        return const Right(null);
+      }
+      return const Left(AuthFailure('Please enter a valid email'));
+    } catch (e) {
+      return Left(AuthFailure(e.toString()));
+    }
+  }
 }

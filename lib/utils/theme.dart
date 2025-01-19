@@ -20,8 +20,11 @@ final ThemeData appTheme = ThemeData(
     secondary: AppColors.brightOrange,
     background: AppColors.black,
     error: AppColors.darkRed,
+    surface: AppColors.lightGrey,
+    onPrimary: AppColors.white,
+    onSecondary: AppColors.darkGrey,
   ),
-  scaffoldBackgroundColor: AppColors.white,
+  scaffoldBackgroundColor: AppColors.black,
   appBarTheme: AppBarTheme(
     backgroundColor: Colors.transparent,
     elevation: 0,
