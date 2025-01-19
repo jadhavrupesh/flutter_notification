@@ -42,10 +42,11 @@ class _RegisterPageState extends State<RegisterPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: AppColors.black),
+            icon: Icon(
+              Icons.arrow_back,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
             onPressed: () => context.go('/login'),
           ),
         ),
@@ -83,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   'Create Account',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.black,
+                        color: Theme.of(context).colorScheme.onBackground,
                       ),
                 ),
                 const SizedBox(height: 8),
@@ -98,7 +99,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: _nameController,
                   decoration: InputDecoration(
                     hintText: 'Full Name',
-                    hintStyle: TextStyle(color: AppColors.darkGrey.withOpacity(0.7)),
+                    hintStyle:
+                        TextStyle(color: AppColors.darkGrey.withOpacity(0.7)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(color: AppColors.lightGrey),
@@ -119,7 +121,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     hintText: 'Email',
-                    hintStyle: TextStyle(color: AppColors.darkGrey.withOpacity(0.7)),
+                    hintStyle:
+                        TextStyle(color: AppColors.darkGrey.withOpacity(0.7)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(color: AppColors.lightGrey),
@@ -140,7 +143,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: _obscurePassword,
                   decoration: InputDecoration(
                     hintText: 'Password',
-                    hintStyle: TextStyle(color: AppColors.darkGrey.withOpacity(0.7)),
+                    hintStyle:
+                        TextStyle(color: AppColors.darkGrey.withOpacity(0.7)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(color: AppColors.lightGrey),
@@ -155,10 +159,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                        _obscurePassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
                         color: AppColors.darkGrey,
                       ),
-                      onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                      onPressed: () =>
+                          setState(() => _obscurePassword = !_obscurePassword),
                     ),
                   ),
                 ),
@@ -168,7 +175,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: _obscureConfirmPassword,
                   decoration: InputDecoration(
                     hintText: 'Confirm Password',
-                    hintStyle: TextStyle(color: AppColors.darkGrey.withOpacity(0.7)),
+                    hintStyle:
+                        TextStyle(color: AppColors.darkGrey.withOpacity(0.7)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(color: AppColors.lightGrey),
@@ -183,11 +191,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
+                        _obscureConfirmPassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
                         color: AppColors.darkGrey,
                       ),
-                      onPressed: () =>
-                          setState(() => _obscureConfirmPassword = !_obscureConfirmPassword),
+                      onPressed: () => setState(() =>
+                          _obscureConfirmPassword = !_obscureConfirmPassword),
                     ),
                   ),
                 ),
@@ -221,7 +231,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.deepRed,
                           foregroundColor: AppColors.white,
-                          disabledBackgroundColor: AppColors.deepRed.withOpacity(0.6),
+                          disabledBackgroundColor:
+                              AppColors.deepRed.withOpacity(0.6),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),

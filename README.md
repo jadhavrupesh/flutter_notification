@@ -18,10 +18,19 @@ notifications and a clean authentication flow.
 
 ### Authentication Flow
 
+#### Light Theme
 <div style="display: flex; justify-content: space-between;">
-  <img src="screenshots/ss_01.png" width="30%" alt="Login Screen">
-  <img src="screenshots/ss_02.png" width="30%" alt="Registration Screen">
-  <img src="screenshots/ss_03.png" width="30%" alt="Forgot Password Screen">
+  <img src="screenshots/android/light/android_ss_light_01.png" width="30%" alt="Login Screen - Light">
+  <img src="screenshots/android/light/android_ss_light_02.png" width="30%" alt="Registration Screen - Light">
+  <img src="screenshots/android/light/android_ss_light_03.png" width="30%" alt="Forgot Password Screen - Light">
+</div>
+
+#### Dark Theme
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="screenshots/android/dark/android_ss_dark_01.png" width="30%" alt="Login Screen - Dark">
+  <img src="screenshots/android/dark/android_ss_dark_02.png" width="30%" alt="Registration Screen - Dark">
+  <img src="screenshots/android/dark/android_ss_dark_03.png" width="30%" alt="Forgot Password Screen - Dark">
 </div>
 
 ## Technical Features

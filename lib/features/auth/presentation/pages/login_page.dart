@@ -199,9 +199,9 @@ class _LoginPageState extends State<LoginPage> {
                             : Text(
                                 'Login',
                                 style: TextStyle(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onPrimary),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                       ),
                     );

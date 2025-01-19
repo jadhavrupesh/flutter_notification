@@ -18,13 +18,13 @@ final ThemeData appTheme = ThemeData(
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: AppColors.deepRed,
     secondary: AppColors.brightOrange,
-    background: AppColors.black,
+    background: AppColors.white,
     error: AppColors.darkRed,
     surface: AppColors.lightGrey,
     onPrimary: AppColors.white,
     onSecondary: AppColors.darkGrey,
   ),
-  scaffoldBackgroundColor: AppColors.black,
+  // scaffoldBackgroundColor: AppColors.black,
   appBarTheme: AppBarTheme(
     backgroundColor: Colors.transparent,
     elevation: 0,

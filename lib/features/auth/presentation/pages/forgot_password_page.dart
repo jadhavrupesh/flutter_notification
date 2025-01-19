@@ -40,10 +40,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: AppColors.black),
+            icon: Icon(
+              Icons.arrow_back,
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
             onPressed: () => context.go('/login'),
           ),
         ),
@@ -81,7 +82,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   'Reset Password',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.black,
+                        color: Theme.of(context).colorScheme.onBackground,
                       ),
                 ),
                 const SizedBox(height: 8),
