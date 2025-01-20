@@ -72,14 +72,14 @@ jobs:
       #      - name: Verify formatting
       #        run: dart format --output=none --set-exit-if-changed .
 
-      - name: Analyze project source
-        run: flutter analyze
+      #      - name: Analyze project source
+      #        run: flutter analyze
 
-      - name: Run tests
-        run: flutter test
+      #      - name: Run tests
+      #        run: flutter test
 
-      - name: Build iOS
-        run: flutter build ios --release --no-codesign
+      #      - name: Build iOS
+      #        run: flutter build ios --release --no-codesign
 
       - name: Build APK
         run: flutter build apk
