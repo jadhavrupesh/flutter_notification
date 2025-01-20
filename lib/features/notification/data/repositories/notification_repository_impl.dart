@@ -90,4 +90,9 @@ class NotificationRepositoryImpl implements NotificationRepository {
           color: AppColors.deepRed),
     );
   }
+
+  @override
+  Future<RemoteMessage?> getInitialMessage() async {
+    return await _firebaseMessaging.getInitialMessage();
+  }
 }

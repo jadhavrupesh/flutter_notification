@@ -67,10 +67,19 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void _handleMessage(RemoteMessage message) {
   // Handle notification click here
   logger.d('Handling notification click: ${message.notification?.title}');
-  // You can add navigation logic here based on the notification data
-  if (message.data.containsKey('route')) {
-    // Navigate to specific route based on data
-    logger.d('Route: ${message.data['route']}');
+
+  // Get the deepLink from notification data
+  final deepLink =
+      message.data['deepLink'] ?? message.notification?.android?.clickAction;
+  logger.d('Deep link: $deepLink');
+
+  if (deepLink != null) {
+    if (deepLink.contains('forget_password')) {
+      appRouter.push('/forgot-password');
+    } else {
+      // Handle other deep links
+      logger.d('Unhandled deep link: $deepLink');
+    }
   }
 }
 

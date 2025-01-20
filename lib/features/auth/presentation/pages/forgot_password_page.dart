@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../utils/theme.dart';
 import '../bloc/auth_bloc.dart';
+import 'package:flutter_notification/core/di/injection_container.dart' as di;
+import 'package:flutter_notification/features/notification/domain/repositories/notification_repository.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -11,13 +13,45 @@ class ForgotPasswordPage extends StatefulWidget {
   State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
 }
 
-class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage>
+    with WidgetsBindingObserver {
   final _emailController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _emailController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && mounted) {
+      // Handle notification resume
+      final notificationRepository = di.sl<NotificationRepository>();
+      notificationRepository.getInitialMessage().then((message) {
+        if (message != null && mounted) {
+          final deepLink = message.data['deepLink'] ??
+              message.notification?.android?.clickAction;
+          if (deepLink != null && deepLink.contains('forget_password')) {
+            // Handle any specific actions for forgot password notification
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                    'Welcome back! Please enter your email to reset password.'),
+                duration: Duration(seconds: 3),
+              ),
+            );
+          }
+        }
+      });
+    }
   }
 
   @override

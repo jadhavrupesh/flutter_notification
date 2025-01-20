@@ -6,4 +6,6 @@ abstract class NotificationRepository {
   Future<void> requestPermission();
   Future<void> setupMessageHandlers(Function(RemoteMessage) onMessageHandler);
   Future<void> showNotification(RemoteMessage message);
+
+  Future<RemoteMessage?> getInitialMessage();
 }
