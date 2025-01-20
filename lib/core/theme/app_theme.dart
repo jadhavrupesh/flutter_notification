@@ -31,7 +31,7 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.lightGrey.withOpacity(0.1),
+        fillColor: AppColors.lightGrey.withAlpha((255 * 0.1).round()),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 16,
@@ -57,7 +57,7 @@ class AppTheme {
           borderSide: const BorderSide(color: AppColors.darkRed),
         ),
         hintStyle: TextStyle(
-          color: AppColors.darkGrey.withOpacity(0.5),
+          color: AppColors.darkGrey.withAlpha((255 * 0.5).round()),
           fontSize: 16,
         ),
       ),
@@ -115,18 +115,20 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: Colors.white.withOpacity(0.05),
+        fillColor: Colors.white.withAlpha((255 * 0.05).round()),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 16,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.1)),
+          borderSide:
+              BorderSide(color: Colors.white.withAlpha((255 * 0.1).round())),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.1)),
+          borderSide:
+              BorderSide(color: Colors.white.withAlpha((255 * 0.1).round())),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -141,7 +143,7 @@ class AppTheme {
           borderSide: const BorderSide(color: AppColors.red),
         ),
         hintStyle: TextStyle(
-          color: Colors.white.withOpacity(0.5),
+          color: Colors.white.withAlpha((255 * 0.5).round()),
           fontSize: 16,
         ),
       ),

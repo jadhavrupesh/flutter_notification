@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_notification/core/theme/app_colors.dart';
 import 'package:flutter_notification/core/constants/notification_constants.dart';
-import 'package:flutter_notification/utils/theme.dart';
 import '../../domain/repositories/notification_repository.dart';
 
 class NotificationRepositoryImpl implements NotificationRepository {

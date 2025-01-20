@@ -18,9 +18,9 @@ final ThemeData appTheme = ThemeData(
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: AppColors.deepRed,
     secondary: AppColors.brightOrange,
-    background: AppColors.white,
+    surface: AppColors.white,
+    // Replace background with surface
     error: AppColors.darkRed,
-    surface: AppColors.lightGrey,
     onPrimary: AppColors.white,
     onSecondary: AppColors.darkGrey,
   ),
@@ -71,7 +71,7 @@ final ThemeData appTheme = ThemeData(
   ),
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
-    fillColor: AppColors.lightGrey.withOpacity(0.1),
+    fillColor: AppColors.lightGrey.withAlpha((255 * 0.1).round()),
     contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
@@ -96,7 +96,7 @@ final ThemeData appTheme = ThemeData(
     prefixIconColor: AppColors.darkGrey,
     suffixIconColor: AppColors.darkGrey,
     hintStyle: TextStyle(
-      color: AppColors.darkGrey.withOpacity(0.5),
+      color: AppColors.darkGrey.withAlpha((255 * 0.5).round()),
       fontSize: 14,
     ),
   ),

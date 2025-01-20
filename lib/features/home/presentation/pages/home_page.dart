@@ -49,8 +49,8 @@ class HomePage extends StatelessWidget {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          AppColors.deepRed.withOpacity(0.1),
-                          AppColors.brightOrange.withOpacity(0.1),
+                          AppColors.deepRed.withAlpha((255 * 0.1).round()),
+                          AppColors.brightOrange.withAlpha((255 * 0.1).round()),
                         ],
                       ),
                     ),

@@ -57,8 +57,8 @@ class _LoginPageState extends State<LoginPage> {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          AppColors.deepRed.withOpacity(0.1),
-                          AppColors.brightOrange.withOpacity(0.1),
+                          AppColors.deepRed.withAlpha((255 * 0.1).round()),
+                          AppColors.brightOrange.withAlpha((255 * 0.1).round()),
                         ],
                       ),
                     ),
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                   'Welcome back',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onBackground,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
                 const SizedBox(height: 8),
@@ -83,8 +83,8 @@ class _LoginPageState extends State<LoginPage> {
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Theme.of(context)
                             .colorScheme
-                            .onBackground
-                            .withOpacity(0.7),
+                            .onSurface
+                            .withAlpha((255 * 0.7).round()),
                       ),
                 ),
                 const SizedBox(height: 32),
@@ -95,8 +95,8 @@ class _LoginPageState extends State<LoginPage> {
                     hintStyle: TextStyle(
                         color: Theme.of(context)
                             .colorScheme
-                            .onBackground
-                            .withOpacity(0.5)),
+                            .onSurface
+                            .withAlpha((255 * 0.5).round())),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(color: AppColors.lightGrey),
@@ -120,8 +120,8 @@ class _LoginPageState extends State<LoginPage> {
                     hintStyle: TextStyle(
                         color: Theme.of(context)
                             .colorScheme
-                            .onBackground
-                            .withOpacity(0.5)),
+                            .onSurface
+                            .withAlpha((255 * 0.5).round())),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: const BorderSide(color: AppColors.lightGrey),
@@ -139,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                         _obscurePassword
                             ? Icons.visibility_off
                             : Icons.visibility,
-                        color: Theme.of(context).colorScheme.onBackground,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       onPressed: () =>
                           setState(() => _obscurePassword = !_obscurePassword),
@@ -153,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(
                       'Forgot Password?',
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.onBackground,
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -215,7 +215,7 @@ class _LoginPageState extends State<LoginPage> {
                       text: TextSpan(
                         text: "Don't have an account? ",
                         style: TextStyle(
-                            color: Theme.of(context).colorScheme.onBackground),
+                            color: Theme.of(context).colorScheme.onSurface),
                         children: [
                           TextSpan(
                             text: 'Sign Up',
